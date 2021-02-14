@@ -29,8 +29,8 @@ int main() {
         if(numeroComandos > 10000) numeroComandos = 10000;
 
         char* comandos = (char*) malloc(sizeof(char)*numeroComandos);
-
-        scanf("%s", comandos);
+        for(int k = 0; k < numeroComandos; k++)
+            scanf("%c", &comandos[k]);
 
         for(int j = 0; j < numeroComandos; j++){
             if(comandos[j] == '>'){
@@ -50,10 +50,7 @@ int main() {
         }
 
         free(comandos);
-    }
-
-    for(int i = 0; i < n; i++){
-        printf("%d %d %d\n", data[i].dia, data[i].mes, data[i].ano);
+        printf("%d/%d/%d\n", data[i].dia, data[i].mes, data[i].ano);
     }
 
     return 0;
