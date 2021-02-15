@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 struct tRacional {
-    long long numer;
-    long long denom;
+    long long numerador;
+    long long denominador;
 };
 
 struct tRacional racional(int, int);
@@ -27,35 +27,35 @@ int main()
         switch (operacao) {
             case '+':
                 resultado = reduz(soma(Q1, Q2));
-                if(resultado.denom < 0){
-                    resultado.denom = 0 - resultado.denom;
-                    resultado.numer = 0 - resultado.numer;
+                if(resultado.denominador < 0){
+                    resultado.denominador = 0 - resultado.denominador;
+                    resultado.numerador = 0 - resultado.numerador;
                 }
-                printf("%lld %lld\n", resultado.numer, resultado.denom);
+                printf("%lld %lld\n", resultado.numerador, resultado.denominador);
                 break;
             case '-':
                 resultado = reduz(soma(Q1, negativo(Q2)));
-                if(resultado.denom < 0){
-                    resultado.denom = 0 - resultado.denom;
-                    resultado.numer = 0 - resultado.numer;
+                if(resultado.denominador < 0){
+                    resultado.denominador = 0 - resultado.denominador;
+                    resultado.numerador = 0 - resultado.numerador;
                 }
-                printf("%lld %lld\n", resultado.numer, resultado.denom);
+                printf("%lld %lld\n", resultado.numerador, resultado.denominador);
                 break;
             case '*':
                 resultado = reduz(mult(Q1, Q2));
-                if(resultado.denom < 0){
-                    resultado.denom = 0 - resultado.denom;
-                    resultado.numer = 0 - resultado.numer;
+                if(resultado.denominador < 0){
+                    resultado.denominador = 0 - resultado.denominador;
+                    resultado.numerador = 0 - resultado.numerador;
                 }
-                printf("%lld %lld\n", resultado.numer, resultado.denom);
+                printf("%lld %lld\n", resultado.numerador, resultado.denominador);
                 break;
             case '/':
                 resultado = reduz(div(Q1, Q2));
-                if(resultado.denom < 0){
-                    resultado.denom = 0 - resultado.denom;
-                    resultado.numer = 0 - resultado.numer;
+                if(resultado.denominador < 0){
+                    resultado.denominador = 0 - resultado.denominador;
+                    resultado.numerador = 0 - resultado.numerador;
                 }
-                printf("%lld %lld\n", resultado.numer, resultado.denom);
+                printf("%lld %lld\n", resultado.numerador, resultado.denominador);
                 break;
         }
     }
@@ -65,31 +65,31 @@ int main()
 
 struct tRacional racional(int num, int den) {
     struct tRacional result;
-    result.numer = (long long) num;
-    result.denom = (long long) den;
+    result.numerador = (long long) num;
+    result.denominador = (long long) den;
     return result;
 }
 struct tRacional negativo(struct tRacional Q) {
     struct tRacional result = Q;
-    result.numer = 0 - Q.numer;
+    result.numerador = 0 - Q.numerador;
     return result;
 }
 struct tRacional soma(struct tRacional Q1, struct tRacional Q2) {
     struct tRacional result;
-    result.numer = Q1.numer*Q2.denom + Q2.numer*Q1.denom;
-    result.denom = Q1.denom * Q2.denom;
+    result.numerador = Q1.numerador*Q2.denominador + Q2.numerador*Q1.denominador;
+    result.denominador = Q1.denominador * Q2.denominador;
     return result;
 } 
 struct tRacional mult(struct tRacional Q1, struct tRacional Q2) {
     struct tRacional result;
-    result.numer = Q1.numer * Q2.numer;
-    result.denom = Q1.denom * Q2.denom;
+    result.numerador = Q1.numerador * Q2.numerador;
+    result.denominador = Q1.denominador * Q2.denominador;
     return result;
 }
 struct tRacional div(struct tRacional Q1, struct tRacional Q2) {
     struct tRacional result;
-    result.numer = Q1.numer * Q2.denom;
-    result.denom = Q1.denom * Q2.numer;
+    result.numerador = Q1.numerador * Q2.denominador;
+    result.denominador = Q1.denominador * Q2.numerador;
     return result;
 } 
 long long mdc(long long numerador, long long denominador) {
@@ -100,10 +100,10 @@ long long mdc(long long numerador, long long denominador) {
 }
 struct tRacional reduz(struct tRacional Q) {
     struct tRacional result = Q;
-    long long maiorDivisor = mdc(result.numer, result.denom);
+    long long maiorDivisor = mdc(result.numerador, result.denominador);
 
-    result.numer /= maiorDivisor;
-    result.denom /= maiorDivisor;
+    result.numerador /= maiorDivisor;
+    result.denominador /= maiorDivisor;
 
     return result;
 }
