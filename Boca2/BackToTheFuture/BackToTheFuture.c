@@ -13,24 +13,26 @@ Data avancaPraData(Data, long);
 Data voltaPraData(Data, long);
 
 int main() {
-    unsigned int n;
+    int n;
+
     scanf("%d", &n);
 
-    if(n > 20) n = 20;
-    Data data[20];
+    Data* data = (Data*) malloc(sizeof(Data)*n);
 
     for(int i = 0; i < n; i++){
-        unsigned long numeroComandos = 0;
-        unsigned long diaMais = 0, diaMenos = 0;
+        long numeroComandos;
+        long diaMais = 0, diaMenos = 0;
 
-        scanf("%d %d %d", &data[i].dia, &data[i].mes, &data[i].ano);
-        scanf("%ld", &numeroComandos);
-
-        if(numeroComandos > 10000) numeroComandos = 10000;
+        scanf(" %d", &data[i].dia);
+        scanf(" %d", &data[i].mes);
+        scanf(" %d", &data[i].ano);
+        scanf(" %ld", &numeroComandos);
 
         char* comandos = (char*) malloc(sizeof(char)*numeroComandos);
-        for(int k = 0; k < numeroComandos; k++)
-            scanf("%c", &comandos[k]);
+
+        for(int k = 0; k < numeroComandos; k++) {
+            scanf(" %c", (comandos+k));
+        }
 
         for(int j = 0; j < numeroComandos; j++){
             if(comandos[j] == '>'){
@@ -48,9 +50,9 @@ int main() {
             diaMenos -= diaMais;
             data[i] = voltaPraData(data[i], diaMenos);
         }
-
-        free(comandos);
+        
         printf("%d/%d/%d\n", data[i].dia, data[i].mes, data[i].ano);
+        free(comandos);
     }
 
     return 0;
